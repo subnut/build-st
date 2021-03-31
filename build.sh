@@ -40,4 +40,4 @@ echo '# Building'
 make
 
 echo '# Done building'
-echo "Run '(sudo) make install' to install"
+echo 'Run `make install DESTDIR="/" PREFIX="usr"` to install'
