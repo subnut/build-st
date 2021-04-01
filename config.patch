@@ -1,5 +1,5 @@
 diff --git a/config.h b/config.h
-index 22f7366..88e3101 100644
+index 22f7366..39ece76 100644
 --- a/config.h
 +++ b/config.h
 @@ -5,8 +5,8 @@
@@ -111,7 +111,15 @@ index 22f7366..88e3101 100644
  	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
  	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
  	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
-@@ -203,16 +208,18 @@ static Shortcut shortcuts[] = {
+@@ -196,6 +201,7 @@ static MouseShortcut mshortcuts[] = {
+ /* Internal keyboard shortcuts. */
+ #define MODKEY Mod1Mask
+ #define TERMMOD (ControlMask|ShiftMask)
++#define CLIPMOD (ControlMask|Mod1Mask)
+ 
+ static Shortcut shortcuts[] = {
+ 	/* mask                 keysym          function        argument */
+@@ -203,16 +209,26 @@ static Shortcut shortcuts[] = {
  	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
  	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
  	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
@@ -122,6 +130,14 @@ index 22f7366..88e3101 100644
  	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
  	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
  	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
++	{ CLIPMOD,              XK_c,           clipcopy,       {.i =  0} },
++	{ CLIPMOD,              XK_v,           clippaste,      {.i =  0} },
++	/*
++	 * NOTE: Note the change in case from XK_C to XK_c. That's because
++	 * our mapping doesn't have ShiftMask. i.e. We don't have the Shift
++	 * key pressed. So, we will input a lowercase c (i.e. XK_c) instead
++	 * of and uppercase C (i.e. XK_C)
++	 */
  	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
  	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
  	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
