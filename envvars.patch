@@ -1,0 +1,71 @@
+diff --git a/config.def.h b/config.def.h
+index 6f05dce..d0d8078 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -73,6 +73,17 @@ static unsigned int cursorthickness = 2;
+  */
+ static int bellvolume = 0;
+ 
++/*
++ * environment variables
++ * Name     (char) - Name of the variable
++ * Value    (char) - Value of the variable
++ * Override (int)  - If set to 0, any existing value won't be overwritten
++ */
++static Envvar envvars[] = {
++	/* Name,	Value,		Override */
++	{ "EDITOR",	"/usr/bin/vim",	1 },
++};
++
+ /* default TERM value */
+ char *termname = "st-256color";
+ 
+diff --git a/x.c b/x.c
+index 8bf998e..4041261 100644
+--- a/x.c
++++ b/x.c
+@@ -45,6 +45,12 @@ typedef struct {
+ 	signed char appcursor; /* application cursor */
+ } Key;
+ 
++typedef struct {
++	char *name;
++	char *val;
++	int override;
++} Envvar;
++
+ /* X modifiers */
+ #define XK_ANY_MOD    UINT_MAX
+ #define XK_NO_MOD     0
+@@ -185,6 +191,7 @@ static void mousesel(XEvent *, int);
+ static void mousereport(XEvent *);
+ static char *kmap(KeySym, uint);
+ static int match(uint, uint);
++static void setenvvars(void);
+ 
+ static void run(void);
+ static void usage(void);
+@@ -1877,6 +1884,15 @@ resize(XEvent *e)
+ 	cresize(e->xconfigure.width, e->xconfigure.height);
+ }
+ 
++void
++setenvvars(void)
++{
++	for (int index = 0; index < (sizeof envvars / sizeof envvars[0]); index++) {
++		Envvar envvar = envvars[index];
++		setenv(envvar.name, envvar.val, envvar.override);
++	}
++}
++
+ void
+ run(void)
+ {
+@@ -2059,6 +2075,7 @@ run:
+ 	xinit(cols, rows);
+ 	xsetenv();
+ 	selinit();
++	setenvvars();
+ 	run();
+ 
+ 	return 0;
