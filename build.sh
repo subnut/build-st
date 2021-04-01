@@ -34,8 +34,11 @@ echo '# Done patching'
 echo '# Copying config'
 cp -v config.def.h config.h
 
-echo '# Patching config'
-cat ../config.patch | patch
+echo '# Patching config.h'
+cat ../config.h.patch | patch
+
+echo '# Patching Makefile'
+cat ../Makefile.patch | patch
 
 echo '# Building'
 make || exit $?
