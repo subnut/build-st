@@ -28,6 +28,9 @@ echo '- Mouse scrollback support'
 echo "  NOTE: First hunk (config.def.h) is bound to FAIL, it's OK"
 curl https://st.suckless.org/patches/scrollback/st-scrollback-mouse-altscreen-20200416-5703aa0.diff | patch
 
+echo '- Environment variables support'
+cat ../envvars.patch | patch
+
 echo '# Done patching'
 ### Patches End ###########################################
 
@@ -36,9 +39,6 @@ cp -v config.def.h config.h
 
 echo '# Patching config.h'
 cat ../config.h.patch | patch
-
-echo '# Patching Makefile'
-cat ../Makefile.patch | patch
 
 echo '# Building'
 make || exit $?

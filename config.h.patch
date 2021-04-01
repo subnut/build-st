@@ -1,5 +1,5 @@
 diff --git a/config.h b/config.h
-index 22f7366..39ece76 100644
+index 744ef42..afb7d3e 100644
 --- a/config.h
 +++ b/config.h
 @@ -5,8 +5,8 @@
@@ -37,7 +37,16 @@ index 22f7366..39ece76 100644
  
  /*
   * bell volume. It must be a value between -100 and 100. Use 0 for disabling
-@@ -108,30 +108,30 @@ unsigned int tabspaces = 8;
+@@ -93,7 +93,7 @@ static int bellvolume = 0;
+  */
+ static Envvar envvars[] = {
+ 	/* Name,	Value,		Override */
+-	{ "EDITOR",	"/usr/bin/vim",	1 },
++	{ "BAT_THEME",	"gruvbox-light",	1 },
+ };
+ 
+ /* default TERM value */
+@@ -119,30 +119,30 @@ unsigned int tabspaces = 8;
  /* Terminal colors (16 first used in escape sequence) */
  static const char *colorname[] = {
  	/* 8 normal colors */
@@ -86,7 +95,7 @@ index 22f7366..39ece76 100644
  };
  
  
-@@ -139,8 +139,8 @@ static const char *colorname[] = {
+@@ -150,8 +150,8 @@ static const char *colorname[] = {
   * Default colors (colorname index)
   * foreground, background, cursor, reverse cursor
   */
@@ -97,7 +106,7 @@ index 22f7366..39ece76 100644
  static unsigned int defaultcs = 256;
  static unsigned int defaultrcs = 257;
  
-@@ -186,7 +186,12 @@ static uint forcemousemod = ShiftMask;
+@@ -197,7 +197,12 @@ static uint forcemousemod = ShiftMask;
   */
  static MouseShortcut mshortcuts[] = {
  	/* mask                 button   function        argument       release */
@@ -111,7 +120,7 @@ index 22f7366..39ece76 100644
  	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
  	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
  	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
-@@ -196,6 +201,7 @@ static MouseShortcut mshortcuts[] = {
+@@ -207,6 +212,7 @@ static MouseShortcut mshortcuts[] = {
  /* Internal keyboard shortcuts. */
  #define MODKEY Mod1Mask
  #define TERMMOD (ControlMask|ShiftMask)
@@ -119,7 +128,7 @@ index 22f7366..39ece76 100644
  
  static Shortcut shortcuts[] = {
  	/* mask                 keysym          function        argument */
-@@ -203,16 +209,26 @@ static Shortcut shortcuts[] = {
+@@ -214,16 +220,26 @@ static Shortcut shortcuts[] = {
  	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
  	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
  	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
