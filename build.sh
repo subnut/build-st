@@ -37,7 +37,19 @@ echo '# Patching config'
 cat ../config.patch | patch
 
 echo '# Building'
-make
+make || exit $?
 
 echo '# Done building'
-echo 'Run `make install DESTDIR="/" PREFIX="usr"` to install'
+echo -n 'Install to ~/.local/bin ? [Y/n] '
+read ANSWER
+
+if test -z "$ANSWER" || echo "$ANSWER" | grep -q '^[yY]'
+then
+    echo '# Installing'
+    make install DESTDIR='~/.local' PREFIX=''
+else
+    echo '# Installation skipped'
+fi
+
+echo '# All done!'
+# vim: et ts=4 sts=0 sw=0 :
