@@ -53,8 +53,8 @@ index 8bf998e..4041261 100644
 +setenvvars(void)
 +{
 +	for (int index = 0; index < (sizeof envvars / sizeof envvars[0]); index++) {
-+		Envvar envvar = envvars[index];
-+		setenv(envvar.name, envvar.val, envvar.override);
++		Envvar *envvar = &envvars[index];
++		setenv(envvar->name, envvar->val, envvar->override);
 +	}
 +}
 +
