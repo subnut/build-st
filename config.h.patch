@@ -1,5 +1,5 @@
 diff --git a/config.h b/config.h
-index 744ef42..afb7d3e 100644
+index 744ef42..1caafe6 100644
 --- a/config.h
 +++ b/config.h
 @@ -5,8 +5,8 @@
@@ -37,18 +37,27 @@ index 744ef42..afb7d3e 100644
  
  /*
   * bell volume. It must be a value between -100 and 100. Use 0 for disabling
-@@ -93,7 +93,7 @@ static int bellvolume = 0;
+@@ -93,7 +93,12 @@ static int bellvolume = 0;
   */
  static Envvar envvars[] = {
  	/* Name,	Value,		Override */
 -	{ "EDITOR",	"/usr/bin/vim",	1 },
++#ifndef DARK_MODE
 +	{ "BAT_THEME",	"gruvbox-light",	1 },
++#else
++	{ "BAT_THEME",	"gruvbox-dark",		1 },
++	{ "MY_NVIM_BG", "dark",			1 },
++#endif
  };
  
  /* default TERM value */
-@@ -119,30 +119,30 @@ unsigned int tabspaces = 8;
+@@ -118,31 +123,65 @@ unsigned int tabspaces = 8;
+ 
  /* Terminal colors (16 first used in escape sequence) */
  static const char *colorname[] = {
++
++#ifndef DARK_MODE
++
  	/* 8 normal colors */
 -	"black",
 -	"red3",
@@ -92,10 +101,41 @@ index 744ef42..afb7d3e 100644
 -	"#555555",
 +	"#654735",
 +	"#f9f5d7",
++
++#else
++
++	/* 8 normal colors */
++	"#32302f",
++	"#ea6962",
++	"#a9b665",
++	"#d8a657",
++	"#7daea3",
++	"#d3869b",
++	"#89b482",
++	"#d4be98",
++
++	/* 8 bright colors */
++	"#32302f",
++	"#ea6962",
++	"#a9b665",
++	"#d8a657",
++	"#7daea3",
++	"#d3869b",
++	"#89b482",
++	"#d4be98",
++
++	[255] = 0,
++
++	/* more colors can be added after 255 to use with DefaultXX */
++	"#d4be98",
++	"#1d2021",
++
++#endif
++
  };
  
  
-@@ -150,8 +150,8 @@ static const char *colorname[] = {
+@@ -150,8 +189,8 @@ static const char *colorname[] = {
   * Default colors (colorname index)
   * foreground, background, cursor, reverse cursor
   */
@@ -106,7 +146,7 @@ index 744ef42..afb7d3e 100644
  static unsigned int defaultcs = 256;
  static unsigned int defaultrcs = 257;
  
-@@ -197,7 +197,12 @@ static uint forcemousemod = ShiftMask;
+@@ -197,7 +236,12 @@ static uint forcemousemod = ShiftMask;
   */
  static MouseShortcut mshortcuts[] = {
  	/* mask                 button   function        argument       release */
@@ -120,7 +160,7 @@ index 744ef42..afb7d3e 100644
  	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
  	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
  	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
-@@ -207,6 +212,7 @@ static MouseShortcut mshortcuts[] = {
+@@ -207,6 +251,7 @@ static MouseShortcut mshortcuts[] = {
  /* Internal keyboard shortcuts. */
  #define MODKEY Mod1Mask
  #define TERMMOD (ControlMask|ShiftMask)
@@ -128,7 +168,7 @@ index 744ef42..afb7d3e 100644
  
  static Shortcut shortcuts[] = {
  	/* mask                 keysym          function        argument */
-@@ -214,16 +220,26 @@ static Shortcut shortcuts[] = {
+@@ -214,16 +259,26 @@ static Shortcut shortcuts[] = {
  	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
  	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
  	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
