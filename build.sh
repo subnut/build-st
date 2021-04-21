@@ -31,6 +31,11 @@ curl https://st.suckless.org/patches/scrollback/st-scrollback-mouse-altscreen-20
 echo '- Environment variables support'
 cat ../envvars.patch | patch
 
+if [ $(uname) = OpenBSD ]; then
+    echo '- OpenBSD patch'
+    cat ../openbsd.patch | patch
+fi
+
 echo '# Done patching'
 ### Patches End ###########################################
 
