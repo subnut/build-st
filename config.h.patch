@@ -63,34 +63,6 @@ index 744ef42..e3dd397 100644
 +#if   defined GRUVBOX_LIGHT
 +
 +	/* 8 normal colors */
-+	"#32302f",
-+	"#ea6962",
-+	"#a9b665",
-+	"#d8a657",
-+	"#7daea3",
-+	"#d3869b",
-+	"#89b482",
-+	"#d4be98",
-+
-+	/* 8 bright colors */
-+	"#32302f",
-+	"#ea6962",
-+	"#a9b665",
-+	"#d8a657",
-+	"#7daea3",
-+	"#d3869b",
-+	"#89b482",
-+	"#d4be98",
-+
-+	[255] = 0,
-+
-+	/* more colors can be added after 255 to use with DefaultXX */
-+	"#d4be98",
-+	"#1d2021",
-+
-+#elif defined GRUVBOX_DARK
-+
-+	/* 8 normal colors */
 +	"#654735",
 +	"#c14a4a",
 +	"#6c782e",
@@ -115,6 +87,34 @@ index 744ef42..e3dd397 100644
 +	/* more colors can be added after 255 to use with DefaultXX */
 +	"#654735",
 +	"#f9f5d7",
++
++#elif defined GRUVBOX_DARK
++
++	/* 8 normal colors */
++	"#32302f",
++	"#ea6962",
++	"#a9b665",
++	"#d8a657",
++	"#7daea3",
++	"#d3869b",
++	"#89b482",
++	"#d4be98",
++
++	/* 8 bright colors */
++	"#32302f",
++	"#ea6962",
++	"#a9b665",
++	"#d8a657",
++	"#7daea3",
++	"#d3869b",
++	"#89b482",
++	"#d4be98",
++
++	[255] = 0,
++
++	/* more colors can be added after 255 to use with DefaultXX */
++	"#d4be98",
++	"#1d2021",
 +
 +#elif defined URXVT_LIGHT
 +
