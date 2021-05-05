@@ -46,6 +46,7 @@ echo '# Patching config.h'
 cat ../config.h.patch | patch
 
 echo '# Building'
+export CPPFLAGS="-DGRUVBOX_LIGHT $CPPFLAGS"
 make || exit $?
 
 echo '# Done building'
