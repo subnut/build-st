@@ -45,8 +45,16 @@ cp -v config.def.h config.h
 echo '# Patching config.h'
 cat ../config.h.patch | patch
 
+echo '# Patching config.mk'
+cat ../config.mk.patch | patch
+
+if test -z "$THEME"
+then
+    echo '# WARNING: $THEME not set. Defaulting to GRUVBOX_LIGHT'
+    export THEME=GRUVBOX_LIGHT
+fi
+
 echo '# Building'
-export CPPFLAGS="-DGRUVBOX_LIGHT $CPPFLAGS"
 make || exit $?
 
 echo '# Done building'
