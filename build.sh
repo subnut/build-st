@@ -22,7 +22,7 @@ curl https://st.suckless.org/patches/boxdraw/st-boxdraw_v2-0.8.3.diff | patch
 ## Scrollback
 # https://st.suckless.org/patches/scrollback
 echo '- Scrollback'
-curl https://st.suckless.org/patches/scrollback/st-scrollback-0.8.4.diff | patch
+curl https://st.suckless.org/patches/scrollback/st-scrollback-20210507-4536f46.diff | patch
 
 echo '- Mouse scrollback support'
 echo "  NOTE: First hunk (config.def.h) is bound to FAIL, it's OK"
