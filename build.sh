@@ -50,8 +50,27 @@ cat ../config.mk.patch | patch
 
 if test -z "$THEME"
 then
-    echo '# WARNING: $THEME not set. Defaulting to GRUVBOX_LIGHT'
-    export THEME=GRUVBOX_LIGHT
+    echo '# WARNING: $THEME not set. Prompting user to select one.'
+    echo -n \
+'	1) GRUVBOX_LIGHT
+	2) GRUVBOX_DARK
+	3) URXVT_LIGHT
+	4) default
+'
+    while true
+    do
+        echo -n 'Choose an option: [1] '
+        read ANSWER
+        test -z "$ANSWER" && export ANSWER=1
+        case "$ANSWER" in
+            (1) export THEME_FLAG=-DGRUVBOX_LIGHT; break;;
+            (2) export THEME_FLAG=-DGRUVBOX_DARK;  break;;
+            (3) export THEME_FLAG=-DURXVT_LIGHT;   break;;
+            (4) export THEME_FLAG=;                break;;
+        esac
+    done
+else
+    export THEME_FLAG="-D$THEME"
 fi
 
 echo '# Building'
