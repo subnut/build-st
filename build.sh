@@ -51,15 +51,15 @@ cat ../config.mk.patch | patch
 if test -z "$THEME"
 then
     echo '# WARNING: $THEME not set. Prompting user to select one.'
-    echo -n \
-'	1) GRUVBOX_LIGHT
-	2) GRUVBOX_DARK
-	3) URXVT_LIGHT
-	4) default
-'
+    printf '%s\n%s\n%s\n%s\n' \
+        '1) GRUVBOX_LIGHT'    \
+        '2) GRUVBOX_DARK'     \
+        '3) URXVT_LIGHT'      \
+        '4) default'
+
     while true
     do
-        echo -n 'Choose an option: [1] '
+        printf '%s' 'Choose an option: [1] '
         read ANSWER
         test -z "$ANSWER" && export ANSWER=1
         case "$ANSWER" in
@@ -77,7 +77,7 @@ echo '# Building'
 make || exit $?
 
 echo '# Done building'
-echo -n 'Install to ~/.local/bin ? [Y/n] '
+printf '%s' 'Install to ~/.local/bin ? [Y/n] '
 read ANSWER
 
 if test -z "$ANSWER" || echo "$ANSWER" | grep -q '^[yY]'
@@ -89,4 +89,4 @@ else
 fi
 
 echo '# All done!'
-# vim: et ts=4 sts=0 sw=0 :
+# vim: et ts=2 sts=0 sw=4 nowrap :
